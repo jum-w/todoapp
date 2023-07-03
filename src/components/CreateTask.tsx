@@ -1,3 +1,5 @@
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 
 type Props = {
@@ -16,12 +18,13 @@ const CreateTask = (props: Props) => {
   const submitData = () => {
     setError(0);
     if (name.length > 0 && desc.length > 0 && date >= currDate) {
-      var day = date.getDay();
+      var day = date.getDate();
       var month = date.getMonth() + 1;
       var year = date.getFullYear();
+      var days = day - currDate.getDate();
       var newDate = `${day}/${month}/${year}`;
       const existingTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
-      const task = { name, desc, newDate };
+      const task = { name, desc, days };
       const allTasks = [...existingTasks, task];
 
       localStorage.setItem("tasks", JSON.stringify(allTasks));
@@ -47,7 +50,7 @@ const CreateTask = (props: Props) => {
               props.popup(false);
             }}
           >
-            X
+            <FontAwesomeIcon icon={faXmark} />
           </button>
         </div>
         <div className="flex flex-col my-4">

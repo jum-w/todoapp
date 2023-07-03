@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+
 type Props = {
   name: string;
   date: string;
@@ -15,22 +18,28 @@ const Tasks = (props: Props) => {
     localStorage.setItem("tasks", JSON.stringify(jsonData));
     props.load(!load);
   };
+
   return (
     <div className="flex border justify-center items-center shadow-sm rounded-md border-gray-200 w-full px-4">
-      <div className="w-1/5 p-2 flex justify-start">
-        <input
-          type="checkbox"
+      <div className="w-[10%] p-2 flex justify-start">
+        <button
           onClick={() => {
             completeTask(props.id);
           }}
-        />
+          className="border-gray-400 border rounded-full w-7 h-7 flex items-center justify-center"
+        >
+          <FontAwesomeIcon
+            icon={faCheck}
+            className="text-gray-400 hover:text-yellow-400 p-2"
+          />
+        </button>
       </div>
-      <div className="w-3/5 p-2">
+      <div className="w-[60%] p-2">
         <h1>{props.name}</h1>
         <h2 className="text-gray-500">{props.desc}</h2>
       </div>
-      <div className="w-1/5 p-2 flex justify-end">
-        <h1>{props.date}</h1>
+      <div className="w-[30%] p-2 flex justify-end">
+        <h1>{props.date} days</h1>
       </div>
     </div>
   );

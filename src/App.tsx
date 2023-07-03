@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import CreateTask from "./components/CreateTask";
 import Tasks from "./components/Tasks";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const [popup, setPopup] = useState<boolean>(false);
@@ -11,11 +13,15 @@ function App() {
     setPopup(!popup);
   };
 
+  const loader = () => {
+    setLoad(!load);
+  };
+
   useEffect(() => {
     const data = localStorage.getItem("tasks");
     const parsedData = data ? JSON.parse(data) : null;
     setData(parsedData);
-  }, [data]);
+  }, [load, popup]);
 
   return (
     <div className="bg-gray-50 min-h-screen flex justify-center">
@@ -26,20 +32,23 @@ function App() {
             className="text-center bg-blue-400 px-4 py-2 rounded-md hover:bg-blue-500 duration-150"
             onClick={toggleOpen}
           >
-            + New Task
+            <FontAwesomeIcon icon={faPlus} className="mr-1" /> New Task
           </button>
         </div>
         <div className="">
           {data &&
             data.map((val: any, index: number) => {
               return (
-                <div className="" key={index}>
+                <div
+                  className="hover:-translate-y-1 mb-2 duration-150"
+                  key={index}
+                >
                   <Tasks
                     name={val.name}
                     desc={val.desc}
-                    date={val.newDate}
+                    date={val.days}
                     id={index}
-                    load={setLoad}
+                    load={loader}
                   />
                 </div>
               );
