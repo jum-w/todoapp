@@ -19,10 +19,7 @@ const CreateTask = (props: Props) => {
     setError(0);
     if (name.length > 0 && desc.length > 0 && date >= currDate) {
       var day = date.getDate();
-      var month = date.getMonth() + 1;
-      var year = date.getFullYear();
       var days = day - currDate.getDate();
-      var newDate = `${day}/${month}/${year}`;
       const existingTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
       const task = { name, desc, days };
       const allTasks = [...existingTasks, task];
