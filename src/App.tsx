@@ -7,7 +7,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 function App() {
   const [popup, setPopup] = useState<boolean>(false);
   const [load, setLoad] = useState<boolean>(false);
-  const [data, setData] = useState<any>();
+  const [data, setData] = useState<any>(null);
 
   const toggleOpen = () => {
     setPopup(!popup);
@@ -35,7 +35,7 @@ function App() {
             <FontAwesomeIcon icon={faPlus} className="mr-1" /> New Task
           </button>
         </div>
-        <div className="">
+        <div>
           {data &&
             data.map((val: any, index: number) => {
               return (
@@ -53,6 +53,9 @@ function App() {
                 </div>
               );
             })}
+          {data.length === 0 && (
+            <div>You have no current upcoming tasks! Good job!</div>
+          )}
         </div>
       </div>
       {popup && (
