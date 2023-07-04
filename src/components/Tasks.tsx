@@ -26,7 +26,7 @@ const Tasks = (props: Props) => {
           onClick={() => {
             completeTask(props.id);
           }}
-          className="border-gray-400 border rounded-full w-7 h-7 flex items-center justify-center"
+          className="border-gray-400 border rounded-full w-7 h-7 flex items-center justify-start"
         >
           <FontAwesomeIcon
             icon={faCheck}
