@@ -53,9 +53,6 @@ function App() {
                 </div>
               );
             })}
-          {data.length === 0 && (
-            <div>You have no current upcoming tasks! Good job!</div>
-          )}
         </div>
       </div>
       {popup && (
