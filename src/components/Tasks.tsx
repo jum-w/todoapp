@@ -3,7 +3,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 type Props = {
   name: string;
-  date: string;
+  date: number;
   desc: string;
   id: number;
   load: (value: boolean) => void;
@@ -21,12 +21,12 @@ const Tasks = (props: Props) => {
 
   return (
     <div className="flex border justify-center items-center shadow-sm rounded-md border-gray-200 w-full px-4">
-      <div className="w-[10%] p-2 flex justify-start">
+      <div className="w-[15%] flex justify-start">
         <button
           onClick={() => {
             completeTask(props.id);
           }}
-          className="border-gray-400 border rounded-full w-7 h-7 flex items-center justify-start"
+          className="border-gray-400 border rounded-full w-7 h-7 flex items-center justify-center"
         >
           <FontAwesomeIcon
             icon={faCheck}
@@ -38,8 +38,8 @@ const Tasks = (props: Props) => {
         <h1>{props.name}</h1>
         <h2 className="text-gray-500">{props.desc}</h2>
       </div>
-      <div className="w-[30%] p-2 flex justify-end">
-        <h1>{props.date} days</h1>
+      <div className="w-1/4 p-2 flex justify-end">
+        <h1>{props.date} {props.date === 1 ? "day" : "days"}</h1>
       </div>
     </div>
   );

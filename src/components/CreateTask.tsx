@@ -13,13 +13,13 @@ const CreateTask = (props: Props) => {
   const [date, setDate] = useState<Date>(currDate);
   const [error, setError] = useState(0);
 
-  useEffect(() => {});
+  useEffect(() => { });
 
   const submitData = () => {
     setError(0);
     if (name.length > 0 && desc.length > 0 && date >= currDate) {
-      var day = date.getDate();
-      var days = day - currDate.getDate();
+      var days = calcDays(currDate.getDate(), currDate.getMonth() + 1, currDate.getFullYear(), date.getDate(), date.getMonth() + 1, date.getFullYear())
+
       const existingTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
       const task = { name, desc, days };
       const allTasks = [...existingTasks, task];
@@ -35,6 +35,21 @@ const CreateTask = (props: Props) => {
       setError(3);
     }
   };
+
+  const calcDays = (currDay: number, currMonth: number, currYear: number, day: number, month: number, year: number) => {
+    var total: number = 0;
+
+    if (year > currYear) {
+      total += ((year - currYear) * 365);
+    }
+
+    if (month > currMonth) {
+      total += ((month - currMonth) * 30)
+    }
+
+    total += day - currDay;
+    return total;
+  }
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-10">
@@ -55,9 +70,8 @@ const CreateTask = (props: Props) => {
           <input
             type="text"
             maxLength={20}
-            className={`border px-2 py-1 rounded-md ${
-              error === 1 ? "border-red-600" : ""
-            }`}
+            className={`border px-2 py-1 rounded-md ${error === 1 ? "border-red-600" : ""
+              }`}
             onChange={(e) => setName(e.target.value)}
           />
         </div>
@@ -66,9 +80,8 @@ const CreateTask = (props: Props) => {
           <input
             type="text"
             maxLength={30}
-            className={`border px-2 py-1 rounded-md ${
-              error === 2 ? "border-red-600" : ""
-            }`}
+            className={`border px-2 py-1 rounded-md ${error === 2 ? "border-red-600" : ""
+              }`}
             onChange={(e) => setDesc(e.target.value)}
           />
         </div>
@@ -76,9 +89,8 @@ const CreateTask = (props: Props) => {
           <label className="mb-1 text-gray-600">Date:</label>
           <input
             type="date"
-            className={`border px-2 py-1 rounded-md ${
-              error === 3 ? "border-red-600" : ""
-            }`}
+            className={`border px-2 py-1 rounded-md ${error === 3 ? "border-red-600" : ""
+              }`}
             onChange={(e) => setDate(new Date(e.target.value))}
           />
         </div>

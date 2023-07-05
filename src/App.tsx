@@ -25,9 +25,9 @@ function App() {
 
   return (
     <div className="bg-gray-50 min-h-screen flex justify-center">
-      <div className="w-2/3 mt-4">
+      <div className="sm:w-2/3 px-2 sm:px-0 mt-4">
         <div className="flex justify-between mb-4 items-center">
-          <h1 className="text-2xl font-bold">Your upcoming tasks</h1>
+          <h1 className="text-2xl font-bold mr-6">Your upcoming tasks</h1>
           <button
             className="text-center bg-blue-400 px-4 py-2 rounded-md hover:bg-blue-500 duration-150"
             onClick={toggleOpen}
@@ -53,6 +53,7 @@ function App() {
                 </div>
               );
             })}
+          {(!data || data.length === 0) && <div>You have no more tasks to complete. Good job!</div>}
         </div>
       </div>
       {popup && (
